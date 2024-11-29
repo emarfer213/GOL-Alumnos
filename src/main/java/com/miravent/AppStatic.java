@@ -103,9 +103,9 @@ public class AppStatic extends Application {
         graphics.setFill(Color.LAVENDER);
         graphics.fillRect(0, 0, WIDTH, WIDTH);
 
-        for (int i = 0; i < Life.grid.length; i++) {
-            for (int j = 0; j < Life.grid[i].length; j++) {
-                if (Life.grid[i][j]) {
+        for (int i = 0; i < Life.getGrid().length; i++) {
+            for (int j = 0; j < Life.getGrid()[i].length; j++) {
+                if (Life.getGrid()[i][j]) {
                     // first rect will end up becoming the border
                     graphics.setFill(Color.gray(0.5, 0.5));
                     graphics.fillRect(i * cellSize, j * cellSize, cellSize, cellSize);
@@ -120,8 +120,8 @@ public class AppStatic extends Application {
             }
         }
 
-        nPoblacion.setText(String.valueOf(Life.population));
-        nGeneracion.setText(String.valueOf(Life.generation));
+        nPoblacion.setText(String.valueOf(Life.getPopulation()));
+        nGeneracion.setText(String.valueOf(Life.getGeneration()));
 
     }
 
