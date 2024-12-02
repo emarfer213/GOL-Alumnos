@@ -1,5 +1,7 @@
 package com.miravent;
+
 import java.util.Random;
+
 public class Life {
 
     /*establecemos el valor booleano que definira el estado de las celdas, vivas(true) o muertas(false)*/
@@ -107,6 +109,35 @@ public class Life {
                     } else {
                         newGrid[i][j] = false;
 
+                        /*creamos una variable la cual usaremos para crear la probabilidad de que nuestra casilla muerta nos reviva
+                         * y le ponemos un math.random con un rango de mil*/
+                        int revivir = (int) (Math.random() * 1000) + 1;
+
+                        /*crearemos un if para hacer que si el valor es de 1 a 5 la casilla revivira y se sumara a la poblacion*/
+                        if (revivir <= 5 && revivir >= 1) {
+                            newGrid[i][j] = true;
+                            population++;
+
+                            /*creamos dos bucles en los cuales comprobaremos las casillas adyacentes de cada casilla revivida*/
+                            for (int l = i - 1; l <= i + 1; l++) {
+                                for (int k = j - 1; k <= j + 1; k++) {
+
+                                    /*creamos un if para establecer que no se pueda salir del tamaño de nuestro grid*/
+                                    if (l >= 0 && l < grid.length && k >= 0 && k < grid.length) {
+                                        /*crearemos una nueva variable que comprobara si las casillas adyacentes revivira o no,
+                                    y le asignaremos un valor aleatorio entre 1 y 4*/
+                                        int revivirAdyacente = (int) (Math.random() * 4) + 1;
+
+                                        /*si el valor es 1 la casilla adyacente revivira y le sumaremos 1 a la poblacion*/
+                                        if (revivirAdyacente == 2) {
+                                            newGrid[l][k] = true;
+                                            population++;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
                     }
                 }
             }
@@ -135,19 +166,19 @@ public class Life {
     /*creamos esta funcion la cual llama al valor "grid",
     ya que es un valor privado necesitamos llamarlo mediante un metodo public,
     para que AppStatic pueda tomar el valor sin acceder directemente a la variable*/
-    public static boolean[][] getGrid(){
+    public static boolean[][] getGrid() {
         return grid;
     }
 
     /*creamos esta funcion para que AppStatic pueda acceder al valor population
     sin acceder directamente a la variable*/
-    public static int getPopulation(){
+    public static int getPopulation() {
         return population;
     }
 
     /*creamos esta funcion para que AppStatic pueda acceder al valor generation
     sin tener que acceder directamente a la variable ya que es privada y esta funcion es publica*/
-    public static int getGeneration(){
+    public static int getGeneration() {
         return generation;
     }
 
